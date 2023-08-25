@@ -5,6 +5,7 @@
   --color-light: #f1f3f5;
 
   --color-theme: #1098ad;
+  --color-blue: #0d80bf;
   --color-accent: #ffa94d;
 }
 
@@ -111,7 +112,7 @@ progress {
   border-radius: 100px;
 }
 ::-webkit-progress-value {
-  background-color: var(--color-theme);
+  background-color: var(--color-blue);
   border-radius: 100px;
 }
 
@@ -120,7 +121,7 @@ progress {
   font-family: inherit;
   color: inherit;
   font-size: 2rem;
-  border: 2px solid var(--color-dark);
+  border: 2px solid var(--color-blue);
   background-color: var(--color-dark);
   padding: 1.2rem 2.4rem;
   cursor: pointer;
@@ -134,6 +135,7 @@ progress {
 
 .btn-option:not([disabled]):hover {
   transform: translateX(1.2rem);
+  border-color: var(--color-blue);
 }
 
 .btn[disabled]:hover {
@@ -154,16 +156,17 @@ progress {
 .btn-option {
   width: 100%;
   text-align: left;
+  border-color: var(--color-dark);
 }
 
 .btn-option.correct {
-  background-color: var(--color-theme);
-  border: 2px solid var(--color-theme);
+  background-color: var(--color-blue);
+  border: 2px solid var(--color-blue);
   color: var(--color-light);
 }
 .btn-option.wrong {
-  background-color: var(--color-accent);
-  border: 2px solid var(--color-accent);
+  background-color: var(--color-medium);
+  border: 2px solid var(--color-medium);
   color: var(--color-darkest);
 }
 
@@ -172,7 +175,7 @@ progress {
 }
 
 .result {
-  background-color: var(--color-theme);
+  background-color: var(--color-blue);
   color: var(--color-light);
   border-radius: 100px;
   text-align: center;
@@ -208,7 +211,7 @@ progress {
   float: left;
   font-size: 1.8rem;
   color: var(--color-medium);
-  border: 2px solid var(--color-dark);
+  border: 2px solid var(--color-blue);
   padding: 1.35rem 2.8rem;
   border-radius: 100px;
 }
