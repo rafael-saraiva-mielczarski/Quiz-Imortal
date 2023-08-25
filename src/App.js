@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import { getDatabase, child, ref, get } from "firebase/database";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
@@ -10,6 +11,7 @@ import Progress from "./components/Progress";
 import EndScreen from "./components/EndScreen";
 import Footer from "./components/Footer";
 import Timer from "./components/Timer";
+import { app } from "./services/firebase";
 
 //centralizar os dados com o status da aplicação é uma forma pratica de gerenciar os dois estados, que são relacionados, em um unico lugar
 const initialState = {
@@ -84,6 +86,8 @@ function reducer(state, action) {
 }
 
 export default function App() {
+  const dbRef = ref(getDatabase(app));
+
   const [
     { questions, status, index, answer, points, highscore, secondsRemaining },
     dispatch,
@@ -94,11 +98,16 @@ export default function App() {
   const numQuestions = questions.length;
 
   useEffect(() => {
-    fetch("http://localhost:9000/questions")
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({ type: "dataFailed" }));
-  }, []);
+    get(child(dbRef, "questions"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          dispatch({ type: "dataReceived", payload: snapshot.val() });
+        }
+      })
+      .catch((error) => {
+        dispatch({ type: "dataFailed" });
+      });
+  }, [dbRef]);
 
   return (
     <div className="app">
